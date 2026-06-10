@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Cadastro | Bus Flow</title>
+
+<link rel="stylesheet" href="css/style.css">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+
+<header class="header">
+
+<div class="container">
+
+<div class="logo">
+
+<div class="logo-icon">
+🚌
+</div>
+
+<div>
+
+<h2>Bus Flow</h2>
+
+<span>
+Mobilidade Inteligente
+</span>
+
+</div>
+
+</div>
+
+<nav>
+
+<a href="index.html">
+Início
+</a>
+
+<a href="info.html">
+Ônibus
+</a>
+
+<a href="cadastro.html">
+Cadastro
+</a>
+
+</nav>
+
+</div>
+
+</header>
+
+<section class="auth-section">
+
+<div class="container">
+
+<div class="auth-grid">
+
+<div class="auth-info">
+
+<span class="badge">
+
+🚀 Cadastro Inteligente
+
+</span>
+
+<h1>
+
+Crie sua conta
+no Bus Flow
+
+</h1>
+
+<p>
+
+Cadastre-se gratuitamente usando CPF.
+
+Empresas e órgãos públicos podem utilizar CNPJ para
+gerenciar frotas e disponibilizar localização em tempo real.
+
+</p>
+
+<div class="benefits">
+
+<div class="benefit">
+
+📍 Localização em Tempo Real
+
+</div>
+
+<div class="benefit">
+
+🚌 Monitoramento de Frotas
+
+</div>
+
+<div class="benefit">
+
+⏱️ Horários Inteligentes
+
+</div>
+
+<div class="benefit">
+
+🤖 Assistente Virtual
+
+</div>
+
+</div>
+
+</div>
+
+<div class="auth-card">
+
+<div class="tabs">
+
+<button class="tab active">
+
+Cadastro
+
+</button>
+
+<button class="tab">
+
+Login
+
+</button>
+
+</div>
+
+<form id="cadastroForm">
+
+<label>
+
+Tipo de Documento
+
+</label>
+
+<select id="tipoDocumento">
+
+<option value="cpf">
+
+CPF
+
+</option>
+
+<option value="cnpj">
+
+CNPJ
+
+</option>
+
+</select>
+
+<div id="empresaFields" style="display:none;">
+
+<label>
+
+Nome da Organização
+
+</label>
+
+<input
+type="text"
+placeholder="Nome da empresa ou órgão">
+
+<label>
+
+Tipo de Organização
+
+</label>
+
+<select>
+
+<option>
+
+Empresa de Transporte
+
+</option>
+
+<option>
+
+Órgão Público
+
+</option>
+
+</select>
+
+</div>
+
+<label>
+
+Nome Completo
+
+</label>
+
+<input
+type="text"
+placeholder="Digite seu nome">
+
+<label>
+
+Documento
+
+</label>
+
+<input
+type="text"
+id="documento"
+placeholder="Digite CPF ou CNPJ">
+
+<label>
+
+E-mail
+
+</label>
+
+<input
+type="email"
+placeholder="Digite seu e-mail">
+
+<label>
+
+Senha
+
+</label>
+
+<input
+type="password"
+placeholder="Digite sua senha">
+
+<label>
+
+Confirmar Senha
+
+</label>
+
+<input
+type="password"
+placeholder="Repita sua senha">
+
+<button
+type="submit"
+class="submit-btn">
+
+Criar Conta
+
+</button>
+
+</form>
+
+<div class="separator">
+
+<span>
+ou
+</span>
+
+</div>
+
+<button class="google-btn">
+
+Continuar com Google
+
+</button>
+
+<div class="plans-preview">
+
+<h3>
+
+Planos Empresariais
+
+</h3>
+
+<div class="mini-plan">
+
+<strong>
+
+Plano Básico
+
+</strong>
+
+<p>
+
+R$10/mês
+
+</p>
+
+</div>
+
+<div class="mini-plan premium-mini">
+
+<strong>
+
+Plano Premium
+
+</strong>
+
+<p>
+
+R$30/mês
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<footer>
+
+<div class="container footer-content">
+
+<div>
+
+<h3>
+
+Bus Flow
+
+</h3>
+
+<p>
+
+Mobilidade Inteligente para Todos
+
+</p>
+
+</div>
+
+<div>
+
+<a href="index.html">
+Início
+</a>
+
+<a href="info.html">
+Ônibus
+</a>
+
+<a href="cadastro.html">
+Cadastro
+</a>
+
+</div>
+
+</div>
+
+</footer>
+
+<script>
+
+const tipoDocumento =
+document.getElementById("tipoDocumento");
+
+const empresaFields =
+document.getElementById("empresaFields");
+
+tipoDocumento.addEventListener("change", () => {
+
+if(tipoDocumento.value === "cnpj"){
+
+empresaFields.style.display = "block";
+
+}else{
+
+empresaFields.style.display = "none";
+
+}
+
+});
+
+</script>
+
+<script src="js/app.js"></script>
+
+</body>
+
+</html>
