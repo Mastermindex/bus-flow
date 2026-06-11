@@ -8,7 +8,7 @@ const supabaseKey = "SUA_PUBLISHABLE_KEY_AQUI";
 const supabase = createClient(supabaseUrl, supabaseKey);
 
 // 🔵 ELEMENTOS DO HTML
-const form = document.getElementById("formCadastro");
+const form = document.getElementById("cadastroForm");
 const msg = document.getElementById("msg");
 
 // 🔵 CADASTRO
