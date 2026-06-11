@@ -9,7 +9,6 @@ const supabase = createClient(supabaseUrl, supabaseKey);
 
 // 🔵 ELEMENTOS DO HTML
 const form = document.getElementById("cadastroForm");
-<p id="msg"></p>
 const msg = document.getElementById("msg");
 
 // 🔵 CADASTRO
@@ -20,25 +19,18 @@ form.addEventListener("submit", async (e) => {
   const email = document.getElementById("email").value;
   const senha = document.getElementById("senha").value;
 
-  // envia pro Supabase
   const { data, error } = await supabase
     .from("usuarios")
     .insert([
-      {
-        nome: nome,
-        email: email,
-        senha: senha
-      }
+      { nome, email, senha }
     ]);
 
-  // erro
   if (error) {
     console.log(error);
     msg.innerText = "Erro ao cadastrar ❌";
     return;
   }
 
-  // sucesso
   msg.innerText = "Cadastro realizado com sucesso 🚍";
   form.reset();
 });
