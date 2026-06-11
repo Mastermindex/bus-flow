@@ -1,3 +1,4 @@
+console.log("app.js está rodando");
 import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm";
 
 // 🔵 CONEXÃO COM SUPABASE
