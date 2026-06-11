@@ -3,7 +3,7 @@ import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js
 
 // 🔵 CONEXÃO COM SUPABASE
 const supabaseUrl = "https://bvicnnzaqqnrawzceick.supabase.co";
-const supabaseKey = "SUA_PUBLISHABLE_KEY_AQUI";
+const supabaseKey = "sb_publishable_ZOhNuZSXGRTdPKnva57VAA_8KU2mPap";
 
 const supabase = createClient(supabaseUrl, supabaseKey);
 
