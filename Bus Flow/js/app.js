@@ -13,24 +13,42 @@ const msg = document.getElementById("msg");
 
 // 🔵 CADASTRO
 form.addEventListener("submit", async (e) => {
-  e.preventDefault();
+e.preventDefault();
 
-  const nome = document.getElementById("nome").value;
-  const email = document.getElementById("email").value;
-  const senha = document.getElementById("senha").value;
+const nome = document.getElementById("nome").value;
+const email = document.getElementById("email").value;
+const senha = document.getElementById("senha").value;
 
-  const { data, error } = await supabase
-    .from("usuarios")
-    .insert([
-      { nome, email, senha }
-    ]);
+// 🔐 Cria usuário no Supabase Auth
+const { data: authData, error: authError } =
+await supabase.auth.signUp({
+email: email,
+password: senha
+});
 
-  if (error) {
-    console.log(error);
-    msg.innerText = "Erro ao cadastrar ❌";
-    return;
-  }
+if (authError) {
+console.log(authError);
+msg.innerText = authError.message;
+return;
+}
 
-  msg.innerText = "Cadastro realizado com sucesso 🚍";
-  form.reset();
+// 👤 Salva os dados na tabela
+const { error: dbError } = await supabase
+.from("usuarios")
+.insert([
+{
+nome,
+email,
+senha
+}
+]);
+
+if (dbError) {
+console.log(dbError);
+msg.innerText = "Conta criada, mas houve erro ao salvar os dados.";
+return;
+}
+
+msg.innerText = "Conta criada com sucesso 🚍";
+form.reset();
 });
