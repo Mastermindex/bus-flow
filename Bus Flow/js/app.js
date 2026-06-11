@@ -9,6 +9,7 @@ const supabase = createClient(supabaseUrl, supabaseKey);
 
 // 🔵 ELEMENTOS DO HTML
 const form = document.getElementById("cadastroForm");
+<p id="msg"></p>
 const msg = document.getElementById("msg");
 
 // 🔵 CADASTRO
