@@ -24,11 +24,12 @@ const userInfo = document.getElementById("userInfo");
 const navEmail = document.getElementById("navEmail");
 const navLogout = document.getElementById("navLogout");
 
-// 🔄 TROCAR ABAS (bloqueia se logado)
+// 🔄 VERIFICA LOGIN VISUAL
 function isLoggedIn() {
   return navLogout && navLogout.style.display === "block";
 }
 
+// 🔄 TROCAR ABAS
 loginTab?.addEventListener("click", () => {
   if (isLoggedIn()) return;
 
@@ -58,6 +59,8 @@ cadastroForm?.addEventListener("submit", async (e) => {
   const senha = document.getElementById("senha").value;
   const tipo = document.getElementById("tipoDocumento")?.value || "cpf";
 
+  msg.innerText = "";
+
   // 🔐 cria usuário no Auth
   const { data: authData, error: authError } = await supabase.auth.signUp({
     email,
@@ -65,8 +68,18 @@ cadastroForm?.addEventListener("submit", async (e) => {
   });
 
   if (authError) {
-    console.log(authError);
-    msg.innerText = authError.message;
+    if (authError.message.includes("already registered")) {
+      msg.innerText = "Esse e-mail já está cadastrado.";
+    } else {
+      msg.innerText = authError.message;
+    }
+    return;
+  }
+
+  const user = authData?.user;
+
+  if (!user) {
+    msg.innerText = "Erro ao criar usuário.";
     return;
   }
 
@@ -77,12 +90,12 @@ cadastroForm?.addEventListener("submit", async (e) => {
     msg.innerText = "Conta criada com sucesso 🚍";
   }
 
-  // 👤 salva dados do perfil (SEM senha)
+  // 👤 salva perfil (SEM senha) com UPSERT
   const { error: dbError } = await supabase
     .from("usuarios")
-    .insert([
+    .upsert([
       {
-        id: authData.user.id,
+        id: user.id,
         nome,
         email,
         tipo
@@ -120,21 +133,20 @@ loginForm?.addEventListener("submit", async (e) => {
 
   loginForm.reset();
 
-  // 🚀 redireciona
   window.location.href = "home.html";
 });
 
 // 🔍 VERIFICAR USUÁRIO LOGADO
 async function checkUser() {
-  const { data } = await supabase.auth.getUser();
+  const { data: { user } } = await supabase.auth.getUser();
 
   const tabs = document.querySelector(".tabs");
 
-  if (data.user) {
-    console.log("Usuário logado:", data.user.email);
+  if (user) {
+    console.log("Usuário logado:", user.email);
 
     if (userInfo) {
-      userInfo.innerText = `Logado como: ${data.user.email}`;
+      userInfo.innerText = `Logado como: ${user.email}`;
     }
 
     cadastroForm.style.display = "none";
@@ -142,7 +154,7 @@ async function checkUser() {
 
     if (tabs) tabs.style.display = "none";
 
-    if (navEmail) navEmail.innerText = data.user.email;
+    if (navEmail) navEmail.innerText = user.email;
     if (navLogout) navLogout.style.display = "block";
 
   } else {
