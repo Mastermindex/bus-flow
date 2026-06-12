@@ -22,11 +22,11 @@ const msg = document.getElementById("msg");
 let currentUser = null;
 let userData = null;
 
-// 🔐 CARREGAR USUÁRIO
+// 🔐 CARREGAR USUÁRIO LOGADO
 async function loadUser() {
-  const { data: { user } } = await supabase.auth.getUser();
+  const { data: { user }, error: userError } = await supabase.auth.getUser();
 
-  if (!user) {
+  if (userError || !user) {
     window.location.href = "cadastro.html";
     return;
   }
@@ -35,37 +35,39 @@ async function loadUser() {
 
   emailEl.innerText = user.email;
 
-  // 🔵 BUSCAR DADOS NA TABELA
+  // 🔵 BUSCAR DADOS DO PERFIL
   const { data, error } = await supabase
     .from("usuarios")
     .select("*")
-    .eq("email", user.email)
+    .eq("id", user.id)
     .single();
 
   if (error) {
     console.log(error);
-    msg.innerText = "Erro ao carregar dados.";
+    msg.innerText = "Erro ao carregar dados do usuário.";
     return;
   }
 
   userData = data;
 
-  nomeEl.innerText = data.nome;
+  nomeEl.innerText = data.nome || "";
   documentoEl.innerText = data.documento || "Não informado";
 }
 
 // 🔵 SALVAR ALTERAÇÕES
 salvarBtn.addEventListener("click", async () => {
-  const novoNome = editNome.value;
-  const novoDocumento = editDocumento.value;
+  const novoNome = editNome.value.trim();
+  const novoDocumento = editDocumento.value.trim();
   const senha = senhaConfirmacao.value;
+
+  msg.innerText = "";
 
   if (!senha) {
     msg.innerText = "Digite sua senha para confirmar.";
     return;
   }
 
-  // 🔐 validar senha
+  // 🔐 valida senha no Auth
   const { error: loginError } = await supabase.auth.signInWithPassword({
     email: currentUser.email,
     password: senha
@@ -76,14 +78,14 @@ salvarBtn.addEventListener("click", async () => {
     return;
   }
 
-  // 🔵 atualizar dados
+  // 🔵 update no banco (usuarios)
   const { error } = await supabase
     .from("usuarios")
     .update({
       nome: novoNome || userData.nome,
       documento: novoDocumento || userData.documento
     })
-    .eq("email", currentUser.email);
+    .eq("id", currentUser.id);
 
   if (error) {
     console.log(error);
@@ -93,8 +95,14 @@ salvarBtn.addEventListener("click", async () => {
 
   msg.innerText = "Dados atualizados com sucesso 🚍";
 
+  // 🔄 recarrega dados atualizados
   loadUser();
+
+  // limpa inputs
+  editNome.value = "";
+  editDocumento.value = "";
+  senhaConfirmacao.value = "";
 });
 
-// 🔵 INIT
+// 🚀 INIT
 loadUser();
