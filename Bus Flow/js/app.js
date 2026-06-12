@@ -64,7 +64,11 @@ cadastroForm.addEventListener("submit", async (e) => {
     return;
   }
 
-  msg.innerText = "Conta criada com sucesso 🚍";
+ if (!authData.session) {
+  msg.innerText = "📩 Enviamos um e-mail de confirmação. Verifique sua caixa de entrada!";
+} else {
+  msg.innerText = "Conta criada e login realizado com sucesso 🚍";
+}
   cadastroForm.reset();
 });
 
