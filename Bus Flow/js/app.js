@@ -20,9 +20,12 @@ const loginMsg = document.getElementById("loginMsg");
 
 const userInfo = document.getElementById("userInfo");
 const logoutBtn = document.getElementById("logoutBtn");
+const tabs = document.querySelector(".tabs");
 
-// 🔄 TROCAR ABAS
+// 🔄 TROCAR ABAS (só funciona se NÃO estiver logado)
 loginTab.addEventListener("click", () => {
+  if (logoutBtn && logoutBtn.style.display === "block") return;
+
   cadastroForm.style.display = "none";
   loginForm.style.display = "block";
 
@@ -31,6 +34,8 @@ loginTab.addEventListener("click", () => {
 });
 
 cadastroTab.addEventListener("click", () => {
+  if (logoutBtn && logoutBtn.style.display === "block") return;
+
   cadastroForm.style.display = "block";
   loginForm.style.display = "none";
 
@@ -111,8 +116,11 @@ async function checkUser() {
       userInfo.innerText = `Logado como: ${data.user.email}`;
     }
 
+    // 🔥 trava UI
     cadastroForm.style.display = "none";
     loginForm.style.display = "none";
+
+    if (tabs) tabs.style.display = "none";
 
     if (logoutBtn) logoutBtn.style.display = "block";
 
@@ -123,8 +131,11 @@ async function checkUser() {
       userInfo.innerText = "Não logado";
     }
 
+    // 🔥 libera UI
     cadastroForm.style.display = "block";
     loginForm.style.display = "none";
+
+    if (tabs) tabs.style.display = "flex";
 
     if (logoutBtn) logoutBtn.style.display = "none";
   }
@@ -138,5 +149,5 @@ if (logoutBtn) {
   });
 }
 
-// 🔁 INICIAR AO CARREGAR
+// 🔁 INICIAR
 checkUser();
