@@ -36,34 +36,44 @@
 
       <h1>👤 Minha Conta</h1>
 
-      <p><strong>Nome:</strong> <span id="nome">Carregando...</span></p>
-      <p><strong>Email:</strong> <span id="email">Carregando...</span></p>
-      <p><strong>CPF/CNPJ:</strong> <span id="documento">Carregando...</span></p>
+      <!-- 🔵 LOADING -->
+      <div id="loading" style="text-align:center;padding:20px;">
+        ⏳ Carregando sua conta...
+      </div>
 
-      <hr style="margin:20px 0;">
+      <!-- 🔵 CONTEÚDO (SÓ APARECE DEPOIS DO LOAD) -->
+      <div id="conteudo" style="display:none;">
 
-      <h3>Editar informações</h3>
+        <p><strong>Nome:</strong> <span id="nome">Carregando...</span></p>
+        <p><strong>Email:</strong> <span id="email">Carregando...</span></p>
+        <p><strong>CPF/CNPJ:</strong> <span id="documento">Carregando...</span></p>
 
-      <label>Novo nome</label>
-      <input type="text" id="editNome" placeholder="Novo nome">
+        <hr style="margin:20px 0;">
 
-      <label>Novo CPF/CNPJ</label>
-      <input type="text" id="editDocumento" placeholder="Novo documento">
+        <h3>Editar informações</h3>
 
-      <label>Confirme sua senha</label>
-      <input type="password" id="senhaConfirmacao" placeholder="Senha atual">
+        <label>Novo nome</label>
+        <input type="text" id="editNome" placeholder="Novo nome">
 
-      <button id="salvarBtn" class="submit-btn">
-        Salvar alterações
-      </button>
+        <label>Novo CPF/CNPJ</label>
+        <input type="text" id="editDocumento" placeholder="Novo documento">
 
-      <p id="msg"></p>
+        <label>Confirme sua senha</label>
+        <input type="password" id="senhaConfirmacao" placeholder="Senha atual">
 
-      <hr style="margin:20px 0;">
+        <button id="salvarBtn" class="submit-btn">
+          Salvar alterações
+        </button>
 
-      <a href="home.html" class="submit-btn" style="display:block;text-align:center;">
-        Voltar ao Dashboard
-      </a>
+        <p id="msg"></p>
+
+        <hr style="margin:20px 0;">
+
+        <a href="home.html" class="submit-btn" style="display:block;text-align:center;">
+          Voltar ao Dashboard
+        </a>
+
+      </div>
 
     </div>
 
