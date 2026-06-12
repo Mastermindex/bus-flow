@@ -64,6 +64,14 @@ Empresas e órgãos públicos podem utilizar CNPJ para gerenciar frotas e dispon
 
 <div class="auth-card">
 
+<!-- 👤 USUÁRIO LOGADO -->
+<p id="userInfo">Não logado</p>
+
+<!-- 🚪 LOGOUT -->
+<button id="logoutBtn" class="submit-btn" style="margin-bottom:10px;">
+Sair
+</button>
+
 <!-- TABS -->
 <div class="tabs">
 <button id="cadastroTab" class="tab active">Cadastro</button>
@@ -74,7 +82,6 @@ Empresas e órgãos públicos podem utilizar CNPJ para gerenciar frotas e dispon
 <form id="cadastroForm">
 
 <label>Tipo de Documento</label>
-
 <select id="tipoDocumento">
 <option value="cpf">CPF</option>
 <option value="cnpj">CNPJ</option>
