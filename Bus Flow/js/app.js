@@ -19,6 +19,7 @@ const msg = document.getElementById("msg");
 const loginMsg = document.getElementById("loginMsg");
 
 const userInfo = document.getElementById("userInfo");
+const logoutBtn = document.getElementById("logoutBtn");
 
 // 🔄 TROCAR ABAS
 loginTab.addEventListener("click", () => {
@@ -112,24 +113,30 @@ async function checkUser() {
 
     cadastroForm.style.display = "none";
     loginForm.style.display = "none";
+
+    if (logoutBtn) logoutBtn.style.display = "block";
+
   } else {
     console.log("Nenhum usuário logado");
 
     if (userInfo) {
       userInfo.innerText = "Não logado";
     }
+
+    cadastroForm.style.display = "block";
+    loginForm.style.display = "none";
+
+    if (logoutBtn) logoutBtn.style.display = "none";
   }
 }
 
 // 🚪 LOGOUT
-const logoutBtn = document.getElementById("logoutBtn");
-
 if (logoutBtn) {
   logoutBtn.addEventListener("click", async () => {
     await supabase.auth.signOut();
-    location.reload();
+    checkUser();
   });
 }
 
-// 🔁 RODAR AO ABRIR SITE
+// 🔁 INICIAR AO CARREGAR
 checkUser();
