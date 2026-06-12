@@ -25,8 +25,12 @@ const navEmail = document.getElementById("navEmail");
 const navLogout = document.getElementById("navLogout");
 
 // 🔄 TROCAR ABAS (bloqueia se logado)
-loginTab.addEventListener("click", () => {
-  if (navLogout && navLogout.style.display === "block") return;
+function isLoggedIn() {
+  return navLogout && navLogout.style.display === "block";
+}
+
+loginTab?.addEventListener("click", () => {
+  if (isLoggedIn()) return;
 
   cadastroForm.style.display = "none";
   loginForm.style.display = "block";
@@ -35,8 +39,8 @@ loginTab.addEventListener("click", () => {
   loginTab.classList.add("active");
 });
 
-cadastroTab.addEventListener("click", () => {
-  if (navLogout && navLogout.style.display === "block") return;
+cadastroTab?.addEventListener("click", () => {
+  if (isLoggedIn()) return;
 
   cadastroForm.style.display = "block";
   loginForm.style.display = "none";
@@ -46,7 +50,7 @@ cadastroTab.addEventListener("click", () => {
 });
 
 // 🔵 CADASTRO
-cadastroForm.addEventListener("submit", async (e) => {
+cadastroForm?.addEventListener("submit", async (e) => {
   e.preventDefault();
 
   const nome = document.getElementById("nome").value;
@@ -54,6 +58,7 @@ cadastroForm.addEventListener("submit", async (e) => {
   const senha = document.getElementById("senha").value;
   const tipo = document.getElementById("tipoDocumento")?.value || "cpf";
 
+  // 🔐 cria usuário no Auth
   const { data: authData, error: authError } = await supabase.auth.signUp({
     email,
     password: senha
@@ -65,15 +70,24 @@ cadastroForm.addEventListener("submit", async (e) => {
     return;
   }
 
+  // 📩 mensagem de verificação
   if (!authData.session) {
     msg.innerText = "📩 Verifique seu e-mail para confirmar a conta!";
   } else {
-    msg.innerText = "Conta criada e login realizado 🚍";
+    msg.innerText = "Conta criada com sucesso 🚍";
   }
 
+  // 👤 salva dados do perfil (SEM senha)
   const { error: dbError } = await supabase
     .from("usuarios")
-    .insert([{ nome, email, senha, tipo }]);
+    .insert([
+      {
+        id: authData.user.id,
+        nome,
+        email,
+        tipo
+      }
+    ]);
 
   if (dbError) {
     console.log(dbError);
@@ -85,7 +99,7 @@ cadastroForm.addEventListener("submit", async (e) => {
 });
 
 // 🔐 LOGIN
-loginForm.addEventListener("submit", async (e) => {
+loginForm?.addEventListener("submit", async (e) => {
   e.preventDefault();
 
   const email = document.getElementById("loginEmail").value;
@@ -106,7 +120,7 @@ loginForm.addEventListener("submit", async (e) => {
 
   loginForm.reset();
 
-  // 🚀 redireciona para dashboard
+  // 🚀 redireciona
   window.location.href = "home.html";
 });
 
@@ -149,12 +163,10 @@ async function checkUser() {
 }
 
 // 🚪 LOGOUT
-if (navLogout) {
-  navLogout.addEventListener("click", async () => {
-    await supabase.auth.signOut();
-    window.location.href = "cadastro.html";
-  });
-}
+navLogout?.addEventListener("click", async () => {
+  await supabase.auth.signOut();
+  window.location.href = "cadastro.html";
+});
 
 // 🔁 INICIAR
 checkUser();
