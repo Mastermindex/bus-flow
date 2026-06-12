@@ -34,6 +34,12 @@
 <a href="cadastro.html">Cadastro</a>
 </nav>
 
+<!-- 🌐 NAVBAR DINÂMICA -->
+<div class="nav-user">
+<span id="navEmail"></span>
+<button id="navLogout" style="display:none;">Sair</button>
+</div>
+
 </div>
 </header>
 
@@ -50,7 +56,7 @@
 
 <p>
 Cadastre-se gratuitamente usando CPF.
-Empresas e órgãos públicos podem utilizar CNPJ para gerenciar frotas e disponibilizar localização em tempo real.
+Empresas e órgãos públicos podem usar CNPJ para gerenciar frotas.
 </p>
 
 <div class="benefits">
@@ -64,13 +70,8 @@ Empresas e órgãos públicos podem utilizar CNPJ para gerenciar frotas e dispon
 
 <div class="auth-card">
 
-<!-- 👤 USUÁRIO LOGADO -->
+<!-- 👤 STATUS DO USUÁRIO -->
 <p id="userInfo">Não logado</p>
-
-<!-- 🚪 LOGOUT -->
-<button id="logoutBtn" class="submit-btn" style="margin-bottom:10px;">
-Sair
-</button>
 
 <!-- TABS -->
 <div class="tabs">
