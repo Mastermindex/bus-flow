@@ -18,6 +18,8 @@ const loginTab = document.getElementById("loginTab");
 const msg = document.getElementById("msg");
 const loginMsg = document.getElementById("loginMsg");
 
+const userInfo = document.getElementById("userInfo");
+
 // 🔄 TROCAR ABAS
 loginTab.addEventListener("click", () => {
   cadastroForm.style.display = "none";
@@ -43,7 +45,7 @@ cadastroForm.addEventListener("submit", async (e) => {
   const email = document.getElementById("email").value;
   const senha = document.getElementById("senha").value;
 
-  const { error: authError } = await supabase.auth.signUp({
+  const { data: authData, error: authError } = await supabase.auth.signUp({
     email,
     password: senha
   });
@@ -54,6 +56,12 @@ cadastroForm.addEventListener("submit", async (e) => {
     return;
   }
 
+  if (!authData.session) {
+    msg.innerText = "📩 Enviamos um e-mail de confirmação. Verifique sua caixa de entrada!";
+  } else {
+    msg.innerText = "Conta criada e login realizado com sucesso 🚍";
+  }
+
   const { error: dbError } = await supabase
     .from("usuarios")
     .insert([{ nome, email, senha }]);
@@ -61,15 +69,10 @@ cadastroForm.addEventListener("submit", async (e) => {
   if (dbError) {
     console.log(dbError);
     msg.innerText = "Conta criada, mas erro no banco.";
-    return;
   }
 
- if (!authData.session) {
-  msg.innerText = "📩 Enviamos um e-mail de confirmação. Verifique sua caixa de entrada!";
-} else {
-  msg.innerText = "Conta criada e login realizado com sucesso 🚍";
-}
   cadastroForm.reset();
+  checkUser();
 });
 
 // 🔐 LOGIN
@@ -79,7 +82,7 @@ loginForm.addEventListener("submit", async (e) => {
   const email = document.getElementById("loginEmail").value;
   const senha = document.getElementById("loginSenha").value;
 
-  const { error } = await supabase.auth.signInWithPassword({
+  const { data, error } = await supabase.auth.signInWithPassword({
     email,
     password: senha
   });
@@ -91,4 +94,42 @@ loginForm.addEventListener("submit", async (e) => {
   }
 
   loginMsg.innerText = "Login realizado com sucesso 🚍";
+  loginForm.reset();
+
+  checkUser();
 });
+
+// 🔍 VERIFICAR USUÁRIO LOGADO
+async function checkUser() {
+  const { data } = await supabase.auth.getUser();
+
+  if (data.user) {
+    console.log("Usuário logado:", data.user.email);
+
+    if (userInfo) {
+      userInfo.innerText = `Logado como: ${data.user.email}`;
+    }
+
+    cadastroForm.style.display = "none";
+    loginForm.style.display = "none";
+  } else {
+    console.log("Nenhum usuário logado");
+
+    if (userInfo) {
+      userInfo.innerText = "Não logado";
+    }
+  }
+}
+
+// 🚪 LOGOUT
+const logoutBtn = document.getElementById("logoutBtn");
+
+if (logoutBtn) {
+  logoutBtn.addEventListener("click", async () => {
+    await supabase.auth.signOut();
+    location.reload();
+  });
+}
+
+// 🔁 RODAR AO ABRIR SITE
+checkUser();
