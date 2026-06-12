@@ -6,7 +6,10 @@ const supabaseKey = "sb_publishable_ZOhNuZSXGRTdPKnva57VAA_8KU2mPap";
 
 const supabase = createClient(supabaseUrl, supabaseKey);
 
-// 🔵 ELEMENTOS
+// 🔵 ELEMENTOS PRINCIPAIS
+const loadingEl = document.getElementById("loading");
+const conteudoEl = document.getElementById("conteudo");
+
 const nomeEl = document.getElementById("nome");
 const emailEl = document.getElementById("email");
 const documentoEl = document.getElementById("documento");
@@ -18,15 +21,18 @@ const senhaConfirmacao = document.getElementById("senhaConfirmacao");
 const salvarBtn = document.getElementById("salvarBtn");
 const msg = document.getElementById("msg");
 
-// 🔵 USUÁRIO ATUAL
+// 🔵 USUÁRIO
 let currentUser = null;
 let userData = null;
 
-// 🔐 CARREGAR USUÁRIO LOGADO
+// 🔐 CARREGAR USUÁRIO
 async function loadUser() {
-  const { data: { user }, error: userError } = await supabase.auth.getUser();
+  loadingEl.style.display = "block";
+  conteudoEl.style.display = "none";
 
-  if (userError || !user) {
+  const { data: { user }, error } = await supabase.auth.getUser();
+
+  if (error || !user) {
     window.location.href = "cadastro.html";
     return;
   }
@@ -35,16 +41,17 @@ async function loadUser() {
 
   emailEl.innerText = user.email;
 
-  // 🔵 BUSCAR DADOS DO PERFIL
-  const { data, error } = await supabase
+  // 🔵 BUSCAR DADOS
+  const { data, error: dbError } = await supabase
     .from("usuarios")
     .select("*")
     .eq("id", user.id)
     .single();
 
-  if (error) {
-    console.log(error);
-    msg.innerText = "Erro ao carregar dados do usuário.";
+  if (dbError) {
+    console.log(dbError);
+    msg.innerText = "Erro ao carregar dados.";
+    loadingEl.style.display = "none";
     return;
   }
 
@@ -52,9 +59,13 @@ async function loadUser() {
 
   nomeEl.innerText = data.nome || "";
   documentoEl.innerText = data.documento || "Não informado";
+
+  // ✅ MOSTRA CONTEÚDO
+  loadingEl.style.display = "none";
+  conteudoEl.style.display = "block";
 }
 
-// 🔵 SALVAR ALTERAÇÕES
+// 💾 SALVAR ALTERAÇÕES
 salvarBtn.addEventListener("click", async () => {
   const novoNome = editNome.value.trim();
   const novoDocumento = editDocumento.value.trim();
@@ -67,7 +78,7 @@ salvarBtn.addEventListener("click", async () => {
     return;
   }
 
-  // 🔐 valida senha no Auth
+  // 🔐 valida senha
   const { error: loginError } = await supabase.auth.signInWithPassword({
     email: currentUser.email,
     password: senha
@@ -78,7 +89,7 @@ salvarBtn.addEventListener("click", async () => {
     return;
   }
 
-  // 🔵 update no banco (usuarios)
+  // 🔵 update
   const { error } = await supabase
     .from("usuarios")
     .update({
@@ -95,13 +106,7 @@ salvarBtn.addEventListener("click", async () => {
 
   msg.innerText = "Dados atualizados com sucesso 🚍";
 
-  // 🔄 recarrega dados atualizados
   loadUser();
-
-  // limpa inputs
-  editNome.value = "";
-  editDocumento.value = "";
-  senhaConfirmacao.value = "";
 });
 
 // 🚀 INIT
