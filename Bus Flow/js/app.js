@@ -19,12 +19,14 @@ const msg = document.getElementById("msg");
 const loginMsg = document.getElementById("loginMsg");
 
 const userInfo = document.getElementById("userInfo");
-const logoutBtn = document.getElementById("logoutBtn");
-const tabs = document.querySelector(".tabs");
 
-// 🔄 TROCAR ABAS (só funciona se NÃO estiver logado)
+// navbar (opcional)
+const navEmail = document.getElementById("navEmail");
+const navLogout = document.getElementById("navLogout");
+
+// 🔄 TROCAR ABAS (bloqueia se logado)
 loginTab.addEventListener("click", () => {
-  if (logoutBtn && logoutBtn.style.display === "block") return;
+  if (navLogout && navLogout.style.display === "block") return;
 
   cadastroForm.style.display = "none";
   loginForm.style.display = "block";
@@ -34,7 +36,7 @@ loginTab.addEventListener("click", () => {
 });
 
 cadastroTab.addEventListener("click", () => {
-  if (logoutBtn && logoutBtn.style.display === "block") return;
+  if (navLogout && navLogout.style.display === "block") return;
 
   cadastroForm.style.display = "block";
   loginForm.style.display = "none";
@@ -50,6 +52,7 @@ cadastroForm.addEventListener("submit", async (e) => {
   const nome = document.getElementById("nome").value;
   const email = document.getElementById("email").value;
   const senha = document.getElementById("senha").value;
+  const tipo = document.getElementById("tipoDocumento")?.value || "cpf";
 
   const { data: authData, error: authError } = await supabase.auth.signUp({
     email,
@@ -63,18 +66,18 @@ cadastroForm.addEventListener("submit", async (e) => {
   }
 
   if (!authData.session) {
-    msg.innerText = "📩 Enviamos um e-mail de confirmação. Verifique sua caixa de entrada!";
+    msg.innerText = "📩 Verifique seu e-mail para confirmar a conta!";
   } else {
-    msg.innerText = "Conta criada e login realizado com sucesso 🚍";
+    msg.innerText = "Conta criada e login realizado 🚍";
   }
 
   const { error: dbError } = await supabase
     .from("usuarios")
-    .insert([{ nome, email, senha }]);
+    .insert([{ nome, email, senha, tipo }]);
 
   if (dbError) {
     console.log(dbError);
-    msg.innerText = "Conta criada, mas erro no banco.";
+    msg.innerText = "Conta criada, mas erro ao salvar no banco.";
   }
 
   cadastroForm.reset();
@@ -88,7 +91,7 @@ loginForm.addEventListener("submit", async (e) => {
   const email = document.getElementById("loginEmail").value;
   const senha = document.getElementById("loginSenha").value;
 
-  const { data, error } = await supabase.auth.signInWithPassword({
+  const { error } = await supabase.auth.signInWithPassword({
     email,
     password: senha
   });
@@ -100,14 +103,18 @@ loginForm.addEventListener("submit", async (e) => {
   }
 
   loginMsg.innerText = "Login realizado com sucesso 🚍";
+
   loginForm.reset();
 
-  checkUser();
+  // 🚀 redireciona para dashboard
+  window.location.href = "home.html";
 });
 
 // 🔍 VERIFICAR USUÁRIO LOGADO
 async function checkUser() {
   const { data } = await supabase.auth.getUser();
+
+  const tabs = document.querySelector(".tabs");
 
   if (data.user) {
     console.log("Usuário logado:", data.user.email);
@@ -116,13 +123,13 @@ async function checkUser() {
       userInfo.innerText = `Logado como: ${data.user.email}`;
     }
 
-    // 🔥 trava UI
     cadastroForm.style.display = "none";
     loginForm.style.display = "none";
 
     if (tabs) tabs.style.display = "none";
 
-    if (logoutBtn) logoutBtn.style.display = "block";
+    if (navEmail) navEmail.innerText = data.user.email;
+    if (navLogout) navLogout.style.display = "block";
 
   } else {
     console.log("Nenhum usuário logado");
@@ -131,21 +138,21 @@ async function checkUser() {
       userInfo.innerText = "Não logado";
     }
 
-    // 🔥 libera UI
     cadastroForm.style.display = "block";
     loginForm.style.display = "none";
 
     if (tabs) tabs.style.display = "flex";
 
-    if (logoutBtn) logoutBtn.style.display = "none";
+    if (navEmail) navEmail.innerText = "";
+    if (navLogout) navLogout.style.display = "none";
   }
 }
 
 // 🚪 LOGOUT
-if (logoutBtn) {
-  logoutBtn.addEventListener("click", async () => {
+if (navLogout) {
+  navLogout.addEventListener("click", async () => {
     await supabase.auth.signOut();
-    checkUser();
+    window.location.href = "cadastro.html";
   });
 }
 
