@@ -6,22 +6,26 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Bus Flow | Mobilidade Inteligente</title>
+<title>Bus Flow</title>
 
 <link rel="stylesheet" href="css/style.css">
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 </head>
 
+
 <body>
+
+
+<!-- ==========================
+     HEADER
+========================== -->
 
 <header class="header">
 
 <div class="container">
+
 
 <div class="logo">
 
@@ -33,17 +37,16 @@
 
 <h2>Bus Flow</h2>
 
-<span>
-Mobilidade Inteligente
-</span>
+<span>Mobilidade Inteligente</span>
 
 </div>
 
 </div>
+
 
 <nav>
 
-<a href="index.html">
+<a href="#inicio">
 Início
 </a>
 
@@ -51,98 +54,94 @@ Início
 Ônibus
 </a>
 
+<a href="#planos">
+Planos
+</a>
+
 <a href="cadastro.html">
 Cadastro
 </a>
 
+
 </nav>
+
 
 </div>
 
 </header>
 
+
+
+
+<!-- ==========================
+     PÁGINA INICIAL
+========================== -->
+
+
+<div id="paginaInicial">
+
+
 <section class="hero">
+
 
 <div class="container hero-grid">
 
-<div class="hero-text">
+
+<div>
+
 
 <span class="badge">
-
-🚀 Plataforma Inteligente de Transporte
-
+🚍 Transporte inteligente
 </span>
 
+
 <h1>
-
-Acompanhe ônibus
-em tempo real
-
+Acompanhe seus ônibus em tempo real
 </h1>
 
+
 <p>
-
-Visualize a localização dos ônibus,
-horários estimados de chegada e
-informações das empresas cadastradas.
-
-Tudo em uma única plataforma moderna.
-
+O Bus Flow conecta passageiros,
+empresas de transporte e órgãos públicos
+em uma plataforma inteligente.
 </p>
+
 
 <div class="hero-buttons">
 
+
 <a href="cadastro.html" class="btn-primary">
-
 Criar Conta
-
 </a>
+
 
 <a href="info.html" class="btn-secondary">
-
-Ver Linhas
-
+Ver Ônibus
 </a>
 
-</div>
 
 </div>
 
-<div class="hero-visual">
+
+</div>
+
+
 
 <div class="bus-card">
 
-<div class="bus-card-header">
 
-<span>
-🚌 Linha 101
+<h3>
+🚌 Linha 204
+</h3>
+
+
+<p>
+Status:
+<span class="status green">
+Online
 </span>
-
-<div class="status-online">
-
-ONLINE
-
-</div>
-
-</div>
-
-<div class="bus-info">
-
-<p>
-
-Empresa:
-Cidade Mobilidade
-
 </p>
 
-<p>
-
-Chegada:
-5 min
-
-</p>
-
-</div>
 
 <div class="progress-bar">
 
@@ -150,17 +149,37 @@ Chegada:
 
 </div>
 
-</div>
+
+<p>
+Próxima parada em 5 minutos
+</p>
+
 
 </div>
 
+
 </div>
+
 
 </section>
 
+
+
+
+
+
+<!-- ==========================
+     STATS
+========================== -->
+
+
 <section class="stats">
 
-<div class="container stats-grid">
+<div class="container">
+
+
+<div class="stats-grid">
+
 
 <div class="stat-card">
 
@@ -174,6 +193,8 @@ Monitoramento
 
 </div>
 
+
+
 <div class="stat-card">
 
 <h2>
@@ -185,6 +206,8 @@ Tempo Real
 </p>
 
 </div>
+
+
 
 <div class="stat-card">
 
@@ -198,6 +221,8 @@ Online
 
 </div>
 
+
+
 <div class="stat-card">
 
 <h2>
@@ -210,28 +235,45 @@ Linhas Monitoradas
 
 </div>
 
+
+
+</div>
+
 </div>
 
 </section>
 
+
+
+
+
+
+<!-- ==========================
+     COMO FUNCIONA
+========================== -->
+
+
 <section class="features">
+
 
 <div class="container">
 
+
 <h2>
-
 Como Funciona
-
 </h2>
+
 
 <p class="section-description">
 
-O Bus Flow conecta passageiros,
-empresas de transporte e órgãos públicos.
+O Bus Flow conecta passageiros, empresas de transporte e órgãos públicos.
 
 </p>
 
+
+
 <div class="feature-grid">
+
 
 <div class="feature-card">
 
@@ -240,18 +282,17 @@ empresas de transporte e órgãos públicos.
 </div>
 
 <h3>
-
 Localização em Tempo Real
-
 </h3>
 
 <p>
-
-Acompanhe o ônibus em tempo real.
-
+Acompanhe o ônibus pelo mapa.
 </p>
 
 </div>
+
+
+
 
 <div class="feature-card">
 
@@ -260,18 +301,18 @@ Acompanhe o ônibus em tempo real.
 </div>
 
 <h3>
-
 Estimativa Inteligente
-
 </h3>
 
 <p>
-
 Previsão automática de chegada.
-
 </p>
 
 </div>
+
+
+
+
 
 <div class="feature-card">
 
@@ -280,18 +321,18 @@ Previsão automática de chegada.
 </div>
 
 <h3>
-
 Empresas Cadastradas
-
 </h3>
 
 <p>
-
 Somente empresas registradas aparecem.
-
 </p>
 
 </div>
+
+
+
+
 
 <div class="feature-card">
 
@@ -300,44 +341,125 @@ Somente empresas registradas aparecem.
 </div>
 
 <h3>
-
 Assistente Empresarial
-
 </h3>
 
 <p>
-
 Gestão inteligente para empresas.
-
 </p>
 
 </div>
 
-</div>
+
 
 </div>
+
+
+</div>
+
 
 </section>
 
-<section class="plans">
+
+
+
+
+
+<!-- ==========================
+     PLANOS
+========================== -->
+
+
+<section class="plans" id="planos">
+
 
 <div class="container">
 
+
 <h2>
-
 Planos
-
 </h2>
+
 
 <div class="plans-grid">
 
+
+
+
+
 <div class="plan-card">
 
+
 <h3>
-
-Plano Básico
-
+👤 Plano Usuário
 </h3>
+
+
+<p>
+Para passageiros
+</p>
+
+
+<div class="price">
+
+R$0
+
+<span>/mês</span>
+
+</div>
+
+
+
+<ul>
+
+<li>
+✔ Ver ônibus em tempo real
+</li>
+
+<li>
+✔ Acompanhar linhas
+</li>
+
+<li>
+✔ GPS e localização
+</li>
+
+<li>
+✔ Previsão de chegada
+</li>
+
+
+</ul>
+
+
+
+<a href="cadastro.html" class="plan-button">
+
+Criar Conta Grátis
+
+</a>
+
+
+</div>
+
+
+
+
+
+
+
+<div class="plan-card">
+
+
+<h3>
+🏢 Plano Básico
+</h3>
+
+
+<p>
+Para empresas e prefeituras
+</p>
+
 
 <div class="price">
 
@@ -347,39 +469,59 @@ R$10
 
 </div>
 
+
+
 <ul>
 
-<li>Cadastro de Frota</li>
+<li>
+✔ Cadastro de frota
+</li>
 
-<li>Rastreamento GPS</li>
+<li>
+✔ Rastreamento GPS
+</li>
 
-<li>Painel Empresarial</li>
+<li>
+✔ Painel empresarial
+</li>
 
-<li>Atualizações em Tempo Real</li>
+<li>
+✔ Atualizações em tempo real
+</li>
+
 
 </ul>
 
-<a href="cadastro.html" class="plan-button">
+
+
+<a class="plan-button">
 
 Assinar
 
 </a>
 
+
 </div>
+
+
+
+
+
+
+
 
 <div class="plan-card premium">
 
-<div class="premium-badge">
-
-POPULAR
-
-</div>
 
 <h3>
-
-Plano Premium
-
+⭐ Plano Premium
 </h3>
+
+
+<p>
+Para empresas e prefeituras
+</p>
+
 
 <div class="price">
 
@@ -389,144 +531,145 @@ R$30
 
 </div>
 
+
+
 <ul>
 
-<li>Tudo do Plano Básico</li>
+<li>
+✔ Tudo do Básico
+</li>
 
-<li>Assistente Virtual IA</li>
+<li>
+✔ Assistente IA
+</li>
 
-<li>Relatórios Inteligentes</li>
+<li>
+✔ Relatórios inteligentes
+</li>
 
-<li>Gestão de Frota</li>
+<li>
+✔ Gestão avançada
+</li>
 
-<li>Suporte Prioritário</li>
 
 </ul>
 
-<a href="cadastro.html" class="plan-button">
 
-Assinar
+
+<a class="plan-button">
+
+Assinar Premium
 
 </a>
 
-</div>
 
 </div>
 
+
+
+
 </div>
+
+
+</div>
+
 
 </section>
 
-<section class="partners">
 
-<div class="container">
 
-<h2>
-
-Empresas Parceiras
-
-</h2>
-
-<div class="partners-grid">
-
-<div class="partner">
-
-Cidade Mobilidade
 
 </div>
 
-<div class="partner">
 
-Expresso Sul
 
-</div>
 
-<div class="partner">
 
-Transporte Alfa
 
-</div>
 
-<div class="partner">
+<!-- ==========================
+     DASHBOARD LOGIN
+========================== -->
 
-UrbanBus
 
-</div>
+<section id="dashboardUsuario" style="display:none">
 
-</div>
 
-</div>
+<div class="container dashboard-home">
 
-</section>
 
-<section class="cta">
+<h1 id="welcome">
+Bem-vindo 🚍
+</h1>
 
-<div class="container">
-
-<h2>
-
-Pronto para começar?
-
-</h2>
 
 <p>
-
-Cadastre-se gratuitamente
-e acompanhe os ônibus da sua cidade.
-
+Seu painel do Bus Flow
 </p>
 
-<a href="cadastro.html" class="btn-primary">
 
-Criar Conta
+
+<div class="menu">
+
+
+<a href="info.html" class="btn-primary">
+
+🚌 Ver ônibus
 
 </a>
 
+
+
+<a href="conta.html" class="btn-primary">
+
+👤 Minha Conta
+
+</a>
+
+
+
+<button id="logoutBtn" class="danger">
+
+🚪 Sair
+
+</button>
+
+
+
 </div>
 
+
+</div>
+
+
 </section>
+
+
+
+
 
 <footer>
 
-<div class="container footer-content">
 
-<div>
+<div class="container">
 
 <h3>
-
 Bus Flow
-
 </h3>
 
 <p>
-
-Mobilidade Inteligente para Todos
-
+Mobilidade Inteligente para Todos 🚍
 </p>
 
 </div>
 
-<div>
-
-<a href="index.html">
-Início
-</a>
-
-<a href="info.html">
-Ônibus
-</a>
-
-<a href="cadastro.html">
-Cadastro
-</a>
-
-</div>
-
-</div>
 
 </footer>
 
-<script src="js/app.js"></script>
+
+
+<script type="module" src="js/app.js"></script>
+
 
 </body>
 
