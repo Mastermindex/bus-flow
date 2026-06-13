@@ -18,9 +18,6 @@
 <body>
 
 
-<!-- ==========================
-     HEADER
-========================== -->
 
 <header class="header">
 
@@ -33,34 +30,43 @@
 🚌
 </div>
 
+
 <div>
 
 <h2>Bus Flow</h2>
 
-<span>Mobilidade Inteligente</span>
+<span>
+Mobilidade Inteligente
+</span>
 
 </div>
 
 </div>
+
 
 
 <nav>
 
-<a href="#inicio">
+
+<a href="#paginaInicial">
 Início
 </a>
+
 
 <a href="info.html">
 Ônibus
 </a>
 
-<a href="#planos">
-Planos
+
+<a href="#dashboardUsuario">
+Dashboard
 </a>
 
-<a href="cadastro.html">
-Cadastro
+
+<a href="conta.html">
+Conta
 </a>
+
 
 
 </nav>
@@ -73,8 +79,9 @@ Cadastro
 
 
 
+
 <!-- ==========================
-     PÁGINA INICIAL
+     INÍCIO
 ========================== -->
 
 
@@ -95,9 +102,11 @@ Cadastro
 </span>
 
 
+
 <h1>
 Acompanhe seus ônibus em tempo real
 </h1>
+
 
 
 <p>
@@ -107,12 +116,14 @@ em uma plataforma inteligente.
 </p>
 
 
+
 <div class="hero-buttons">
 
 
 <a href="cadastro.html" class="btn-primary">
 Criar Conta
 </a>
+
 
 
 <a href="info.html" class="btn-secondary">
@@ -127,6 +138,8 @@ Ver Ônibus
 
 
 
+
+
 <div class="bus-card">
 
 
@@ -135,11 +148,15 @@ Ver Ônibus
 </h3>
 
 
+
 <p>
+
 Status:
+
 <span class="status green">
 Online
 </span>
+
 </p>
 
 
@@ -158,6 +175,7 @@ Próxima parada em 5 minutos
 </div>
 
 
+
 </div>
 
 
@@ -167,18 +185,14 @@ Próxima parada em 5 minutos
 
 
 
-
-<!-- ==========================
-     STATS
-========================== -->
-
-
 <section class="stats">
+
 
 <div class="container">
 
 
 <div class="stats-grid">
+
 
 
 <div class="stat-card">
@@ -192,6 +206,7 @@ Monitoramento
 </p>
 
 </div>
+
 
 
 
@@ -209,6 +224,7 @@ Tempo Real
 
 
 
+
 <div class="stat-card">
 
 <h2>
@@ -220,6 +236,7 @@ Online
 </p>
 
 </div>
+
 
 
 
@@ -239,16 +256,12 @@ Linhas Monitoradas
 
 </div>
 
+
 </div>
 
+
 </section>
-
-
-
-
-
-
-<!-- ==========================
+     <!-- ==========================
      COMO FUNCIONA
 ========================== -->
 
@@ -264,6 +277,7 @@ Como Funciona
 </h2>
 
 
+
 <p class="section-description">
 
 O Bus Flow conecta passageiros, empresas de transporte e órgãos públicos.
@@ -272,42 +286,53 @@ O Bus Flow conecta passageiros, empresas de transporte e órgãos públicos.
 
 
 
+
 <div class="feature-grid">
 
 
+
 <div class="feature-card">
+
 
 <div class="feature-icon">
 📍
 </div>
 
+
 <h3>
 Localização em Tempo Real
 </h3>
+
 
 <p>
 Acompanhe o ônibus pelo mapa.
 </p>
 
+
 </div>
 
 
 
 
+
 <div class="feature-card">
+
 
 <div class="feature-icon">
 ⏱️
 </div>
 
+
 <h3>
 Estimativa Inteligente
 </h3>
+
 
 <p>
 Previsão automática de chegada.
 </p>
 
+
 </div>
 
 
@@ -315,18 +340,22 @@ Previsão automática de chegada.
 
 
 <div class="feature-card">
+
 
 <div class="feature-icon">
 🏢
 </div>
 
+
 <h3>
 Empresas Cadastradas
 </h3>
 
+
 <p>
 Somente empresas registradas aparecem.
 </p>
+
 
 </div>
 
@@ -336,19 +365,24 @@ Somente empresas registradas aparecem.
 
 <div class="feature-card">
 
+
 <div class="feature-icon">
 🤖
 </div>
+
 
 <h3>
 Assistente Empresarial
 </h3>
 
+
 <p>
 Gestão inteligente para empresas.
 </p>
 
+
 </div>
+
 
 
 
@@ -363,22 +397,92 @@ Gestão inteligente para empresas.
 
 
 
+</div>
+
+
+
+
 
 
 <!-- ==========================
-     PLANOS
+     DASHBOARD USUÁRIO
 ========================== -->
 
 
-<section class="plans" id="planos">
+<section id="dashboardUsuario" class="dashboard" style="display:none">
 
 
-<div class="container">
+<div class="container dashboard-home">
+
+
+
+<h1 id="welcome">
+
+Bem-vindo 🚍
+
+</h1>
+
+
+
+<p>
+Seu painel pessoal do Bus Flow
+</p>
+
+
+
+
+
+<div class="menu">
+
+
+
+<a href="info.html" class="btn-primary">
+
+🚌 Ver ônibus
+
+</a>
+
+
+
+
+<a href="conta.html" class="btn-primary">
+
+👤 Minha Conta
+
+</a>
+
+
+
+
+<button id="logoutBtn" class="danger">
+
+🚪 Sair
+
+</button>
+
+
+
+
+</div>
+
+
+
+
+
+
+<!-- ==========================
+     PLANOS NO DASHBOARD
+========================== -->
+
+
+<section class="dashboard-plans">
 
 
 <h2>
 Planos
 </h2>
+
+
 
 
 <div class="plans-grid">
@@ -391,38 +495,47 @@ Planos
 
 
 <h3>
-👤 Plano Usuário
+👤 Usuário
 </h3>
 
 
+
 <p>
-Para passageiros
+Grátis para passageiros
 </p>
+
 
 
 <div class="price">
 
 R$0
 
-<span>/mês</span>
+<span>
+/mês
+</span>
 
 </div>
 
 
 
+
 <ul>
+
 
 <li>
 ✔ Ver ônibus em tempo real
 </li>
 
+
 <li>
 ✔ Acompanhar linhas
 </li>
 
+
 <li>
 ✔ GPS e localização
 </li>
+
 
 <li>
 ✔ Previsão de chegada
@@ -431,13 +544,6 @@ R$0
 
 </ul>
 
-
-
-<a href="cadastro.html" class="plan-button">
-
-Criar Conta Grátis
-
-</a>
 
 
 </div>
@@ -452,41 +558,45 @@ Criar Conta Grátis
 
 
 <h3>
-🏢 Plano Básico
+🏢 Básico
 </h3>
 
 
+
 <p>
-Para empresas e prefeituras
+Empresas e prefeituras
 </p>
+
 
 
 <div class="price">
 
 R$10
 
-<span>/mês</span>
+<span>
+/mês
+</span>
 
 </div>
 
 
 
+
 <ul>
+
 
 <li>
 ✔ Cadastro de frota
 </li>
 
+
 <li>
 ✔ Rastreamento GPS
 </li>
 
-<li>
-✔ Painel empresarial
-</li>
 
 <li>
-✔ Atualizações em tempo real
+✔ Painel empresarial
 </li>
 
 
@@ -494,14 +604,8 @@ R$10
 
 
 
-<a class="plan-button">
-
-Assinar
-
-</a>
-
-
 </div>
+
 
 
 
@@ -514,38 +618,42 @@ Assinar
 
 
 <h3>
-⭐ Plano Premium
+⭐ Premium
 </h3>
 
 
+
 <p>
-Para empresas e prefeituras
+Empresas e prefeituras
 </p>
+
 
 
 <div class="price">
 
 R$30
 
-<span>/mês</span>
+<span>
+/mês
+</span>
 
 </div>
 
 
 
+
 <ul>
 
-<li>
-✔ Tudo do Básico
-</li>
 
 <li>
 ✔ Assistente IA
 </li>
 
+
 <li>
 ✔ Relatórios inteligentes
 </li>
+
 
 <li>
 ✔ Gestão avançada
@@ -556,30 +664,25 @@ R$30
 
 
 
-<a class="plan-button">
-
-Assinar Premium
-
-</a>
-
-
 </div>
+
 
 
 
 
 </div>
 
-
-</div>
 
 
 </section>
 
 
 
-
 </div>
+
+
+
+</section>
 
 
 
@@ -588,64 +691,8 @@ Assinar Premium
 
 
 <!-- ==========================
-     DASHBOARD LOGIN
+FOOTER
 ========================== -->
-
-
-<section id="dashboardUsuario" style="display:none">
-
-
-<div class="container dashboard-home">
-
-
-<h1 id="welcome">
-Bem-vindo 🚍
-</h1>
-
-
-<p>
-Seu painel do Bus Flow
-</p>
-
-
-
-<div class="menu">
-
-
-<a href="info.html" class="btn-primary">
-
-🚌 Ver ônibus
-
-</a>
-
-
-
-<a href="conta.html" class="btn-primary">
-
-👤 Minha Conta
-
-</a>
-
-
-
-<button id="logoutBtn" class="danger">
-
-🚪 Sair
-
-</button>
-
-
-
-</div>
-
-
-</div>
-
-
-</section>
-
-
-
 
 
 <footer>
@@ -653,24 +700,33 @@ Seu painel do Bus Flow
 
 <div class="container">
 
+
 <h3>
 Bus Flow
 </h3>
+
+
 
 <p>
 Mobilidade Inteligente para Todos 🚍
 </p>
 
+
+
 </div>
+
 
 
 </footer>
 
 
 
+
 <script type="module" src="js/app.js"></script>
 
 
+
 </body>
+
 
 </html>
