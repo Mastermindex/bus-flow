@@ -1,5 +1,6 @@
 console.log("app.js funcionando 🚍");
 
+
 import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm";
 
 
@@ -7,20 +8,24 @@ import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js
 // SUPABASE
 // ==========================
 
-const supabaseUrl = "https://bvicnnzaqqnrawzceick.supabase.co";
+const supabaseUrl =
+"https://bvicnnzaqqnrawzceick.supabase.co";
 
-const supabaseKey = "sb_publishable_ZOhNuZSXGRTdPKnva57VAA_8KU2mPap";
+
+const supabaseKey =
+"sb_publishable_ZOhNuZSXGRTdPKnva57VAA_8KU2mPap";
 
 
-const supabase = createClient(
-  supabaseUrl,
-  supabaseKey
+const supabase =
+createClient(
+supabaseUrl,
+supabaseKey
 );
 
 
 
 // ==========================
-// ELEMENTOS
+// ELEMENTOS DASHBOARD
 // ==========================
 
 const paginaInicial =
@@ -42,25 +47,124 @@ document.getElementById("logoutBtn");
 
 
 // ==========================
-// VERIFICAR LOGIN
+// ELEMENTOS LOGIN
 // ==========================
+
+const loginForm =
+document.getElementById("loginForm");
+
+
+const loginEmail =
+document.getElementById("loginEmail");
+
+
+const loginSenha =
+document.getElementById("loginSenha");
+
+
+const loginMsg =
+document.getElementById("loginMsg");
+
+
+
+
+// ==========================
+// LOGIN
+// ==========================
+
+
+loginForm?.addEventListener(
+"submit",
+async(e)=>{
+
+
+e.preventDefault();
+
+
+
+const email =
+loginEmail.value;
+
+
+const senha =
+loginSenha.value;
+
+
+
+const {data,error} =
+await supabase.auth.signInWithPassword({
+
+email,
+
+password:senha
+
+});
+
+
+
+
+if(error){
+
+
+console.log(error);
+
+
+if(loginMsg){
+
+loginMsg.innerText =
+"Login inválido ❌";
+
+}
+
+
+return;
+
+}
+
+
+
+
+if(loginMsg){
+
+loginMsg.innerText =
+"Login realizado 🚍";
+
+}
+
+
+
+mostrarDashboard(data.user);
+
+
+
+});
+
+
+
+
+
+
+
+
+// ==========================
+// VERIFICAR LOGIN EXISTENTE
+// ==========================
+
 
 async function checkUser(){
 
 
-const {data:{user}} =
+const {
+
+data:{user}
+
+} =
 await supabase.auth.getUser();
 
 
 
+
 if(user){
-
-
-console.log(
-"Usuário logado:",
-user.email
-);
-
 
 
 mostrarDashboard(user);
@@ -84,9 +188,11 @@ mostrarInicio();
 
 
 
+
 // ==========================
 // MOSTRAR DASHBOARD
 // ==========================
+
 
 function mostrarDashboard(user){
 
@@ -110,10 +216,12 @@ dashboardUsuario.style.display =
 
 
 
+
 if(welcome){
 
+
 welcome.innerText =
-`Bem-vindo, ${user.email} 🚍`;
+`Bem-vindo ao Bus Flow, ${user.email} 🚍`;
 
 }
 
@@ -131,6 +239,7 @@ welcome.innerText =
 // MOSTRAR INÍCIO
 // ==========================
 
+
 function mostrarInicio(){
 
 
@@ -144,13 +253,13 @@ paginaInicial.style.display =
 
 
 
+
 if(dashboardUsuario){
 
 dashboardUsuario.style.display =
 "none";
 
 }
-
 
 
 }
@@ -167,7 +276,9 @@ dashboardUsuario.style.display =
 
 
 logoutBtn?.addEventListener(
+
 "click",
+
 async()=>{
 
 
@@ -178,7 +289,9 @@ mostrarInicio();
 
 
 }
+
 );
+
 
 
 
