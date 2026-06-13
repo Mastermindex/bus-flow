@@ -16,8 +16,7 @@ const supabaseKey =
 "sb_publishable_ZOhNuZSXGRTdPKnva57VAA_8KU2mPap";
 
 
-const supabase =
-createClient(
+const supabase = createClient(
 supabaseUrl,
 supabaseKey
 );
@@ -47,13 +46,13 @@ const loginTab =
 document.getElementById("loginTab");
 
 
-
 const msg =
 document.getElementById("msg");
 
 
 const loginMsg =
 document.getElementById("loginMsg");
+
 
 
 
@@ -76,6 +75,7 @@ document.getElementById("logoutBtn");
 
 
 
+
 // navbar
 
 const navEmail =
@@ -89,10 +89,8 @@ document.getElementById("navLogout");
 
 
 
-
-
 // ==========================
-// TROCAR ABAS
+// TROCA DE ABAS
 // ==========================
 
 
@@ -116,6 +114,7 @@ loginTab.classList.add("active");
 
 
 
+
 cadastroTab?.addEventListener(
 "click",
 ()=>{
@@ -132,7 +131,6 @@ cadastroTab.classList.add("active");
 
 
 });
-
 
 
 
@@ -169,7 +167,6 @@ const senha =
 document.getElementById("senha").value;
 
 
-
 const tipo =
 document.getElementById("tipoDocumento").value;
 
@@ -191,17 +188,12 @@ password:senha
 
 if(error){
 
-
 msg.innerText =
 error.message;
 
-
 return;
 
-
 }
-
-
 
 
 
@@ -236,18 +228,15 @@ tipo
 
 if(dbError){
 
-
 console.log(dbError);
-
 
 msg.innerText =
 "Erro ao salvar dados ❌";
 
-
 return;
 
-
 }
+
 
 
 
@@ -261,7 +250,6 @@ cadastroForm.reset();
 
 
 });
-
 
 
 
@@ -288,9 +276,9 @@ const email =
 document.getElementById("loginEmail").value;
 
 
-
 const senha =
 document.getElementById("loginSenha").value;
+
 
 
 
@@ -311,18 +299,15 @@ password:senha
 
 if(error){
 
-
 console.log(error);
-
 
 loginMsg.innerText =
 "Email ou senha incorretos ❌";
 
-
 return;
 
-
 }
+
 
 
 
@@ -333,11 +318,9 @@ loginMsg.innerText =
 
 setTimeout(()=>{
 
-
 window.location.href="index.html";
 
-
-},700);
+},500);
 
 
 
@@ -373,19 +356,13 @@ await supabase.auth.getUser();
 
 if(user){
 
-
 mostrarDashboard(user);
-
-
 
 }else{
 
-
-mostrarLogin();
-
+mostrarInicio();
 
 }
-
 
 
 }
@@ -399,7 +376,7 @@ mostrarLogin();
 
 
 // ==========================
-// DASHBOARD
+// MOSTRAR DASHBOARD
 // ==========================
 
 
@@ -417,17 +394,18 @@ paginaInicial.style.display="none";
 
 if(dashboardUsuario){
 
-dashboardUsuario.style.display="block";
+dashboardUsuario.style.display="flex";
 
 }
 
 
 
+
+
 if(welcome){
 
-welcome.innerHTML=
 
-`
+welcome.innerHTML = `
 
 Bem-vindo ao Bus Flow 🚍
 
@@ -445,11 +423,15 @@ ${user.email}
 
 
 
+
+
 if(navEmail){
 
-navEmail.innerText=user.email;
+navEmail.innerText =
+user.email;
 
 }
+
 
 
 if(navLogout){
@@ -459,6 +441,7 @@ navLogout.style.display="block";
 }
 
 
+
 }
 
 
@@ -469,13 +452,13 @@ navLogout.style.display="block";
 
 
 
-
 // ==========================
-// SEM LOGIN
+// MOSTRAR INÍCIO
 // ==========================
 
 
-function mostrarLogin(){
+function mostrarInicio(){
+
 
 
 if(paginaInicial){
@@ -491,6 +474,7 @@ if(dashboardUsuario){
 dashboardUsuario.style.display="none";
 
 }
+
 
 
 }
@@ -518,6 +502,8 @@ window.location.href="index.html";
 
 
 }
+
+
 
 
 
