@@ -1,86 +1,284 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Minha Conta | Bus Flow</title>
 
-  <link rel="stylesheet" href="css/style.css">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Minha Conta | Bus Flow</title>
+
+<link rel="stylesheet" href="css/style.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
 </head>
+
 
 <body>
 
-<header class="header">
-  <div class="container">
-    <div class="logo">
-      <div class="logo-icon">🚌</div>
-      <div>
-        <h2>Bus Flow</h2>
-        <span>Minha Conta</span>
-      </div>
-    </div>
 
-    <nav>
-      <a href="home.html">Dashboard</a>
-      <a href="info.html">Ônibus</a>
-      <a href="conta.html">Conta</a>
-    </nav>
-  </div>
+<header class="header">
+
+<div class="container">
+
+
+<div class="logo">
+
+<div class="logo-icon">
+🚌
+</div>
+
+
+<div>
+
+<h2>
+Bus Flow
+</h2>
+
+<span>
+Minha Conta
+</span>
+
+</div>
+
+
+</div>
+
+
+
+<nav>
+
+<a href="home.html">
+Dashboard
+</a>
+
+<a href="info.html">
+Ônibus
+</a>
+
+<a href="conta.html">
+Conta
+</a>
+
+</nav>
+
+
+
+</div>
+
 </header>
 
+
+
+
+
 <section class="auth-section">
-  <div class="container">
 
-    <div class="auth-card">
 
-      <h1>👤 Minha Conta</h1>
+<div class="container">
 
-      <!-- 🔵 LOADING -->
-      <div id="loading" style="text-align:center;padding:20px;">
-        ⏳ Carregando sua conta...
-      </div>
 
-      <!-- 🔵 CONTEÚDO (SÓ APARECE DEPOIS DO LOAD) -->
-      <div id="conteudo" style="display:none;">
 
-        <p><strong>Nome:</strong> <span id="nome">Carregando...</span></p>
-        <p><strong>Email:</strong> <span id="email">Carregando...</span></p>
-        <p><strong>CPF/CNPJ:</strong> <span id="documento">Carregando...</span></p>
+<div class="auth-card conta-card">
 
-        <hr style="margin:20px 0;">
 
-        <h3>Editar informações</h3>
 
-        <label>Novo nome</label>
-        <input type="text" id="editNome" placeholder="Novo nome">
+<h1>
+👤 Minha Conta
+</h1>
 
-        <label>Novo CPF/CNPJ</label>
-        <input type="text" id="editDocumento" placeholder="Novo documento">
 
-        <label>Confirme sua senha</label>
-        <input type="password" id="senhaConfirmacao" placeholder="Senha atual">
 
-        <button id="salvarBtn" class="submit-btn">
-          Salvar alterações
-        </button>
 
-        <p id="msg"></p>
+<!-- LOADING -->
 
-        <hr style="margin:20px 0;">
+<div id="loading" class="loading">
 
-        <a href="home.html" class="submit-btn" style="display:block;text-align:center;">
-          Voltar ao Dashboard
-        </a>
+⏳ Carregando sua conta...
 
-      </div>
+</div>
 
-    </div>
 
-  </div>
+
+
+
+<!-- CONTEÚDO -->
+
+<div id="conteudo">
+
+
+
+<div class="dados-conta">
+
+
+<p>
+<strong>
+Nome:
+</strong>
+
+<span id="nome">
+Carregando...
+</span>
+
+</p>
+
+
+
+<p>
+
+<strong>
+Email:
+</strong>
+
+<span id="email">
+Carregando...
+</span>
+
+
+</p>
+
+
+
+<p>
+
+<strong>
+CPF/CNPJ:
+</strong>
+
+
+<span id="documento">
+Carregando...
+</span>
+
+
+</p>
+
+
+</div>
+
+
+
+
+
+<hr>
+
+
+
+
+<h3>
+Editar informações
+</h3>
+
+
+
+
+
+<label>
+Novo nome
+</label>
+
+
+<input 
+type="text"
+id="editNome"
+placeholder="Digite seu novo nome">
+
+
+
+
+
+<label>
+Novo CPF/CNPJ
+</label>
+
+
+<input
+type="text"
+id="editDocumento"
+placeholder="Digite seu documento">
+
+
+
+
+
+<label>
+Confirme sua senha
+</label>
+
+
+<input
+type="password"
+id="senhaConfirmacao"
+placeholder="Digite sua senha atual">
+
+
+
+
+
+
+<button 
+id="salvarBtn"
+class="submit-btn">
+
+
+Salvar alterações
+
+
+</button>
+
+
+
+
+
+<p id="msg"></p>
+
+
+
+
+
+
+<hr>
+
+
+
+
+
+<a 
+href="home.html"
+class="submit-btn voltar-btn">
+
+
+Voltar ao Dashboard
+
+
+</a>
+
+
+
+
+
+</div>
+
+
+
+</div>
+
+
+
+</div>
+
+
 </section>
+
+
+
+
 
 <script type="module" src="js/conta.js"></script>
 
+
 </body>
+
+
 </html>
