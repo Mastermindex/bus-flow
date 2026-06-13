@@ -8,6 +8,7 @@ import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js
 // SUPABASE
 // ==========================
 
+
 const supabaseUrl =
 "https://bvicnnzaqqnrawzceick.supabase.co";
 
@@ -16,10 +17,12 @@ const supabaseKey =
 "sb_publishable_ZOhNuZSXGRTdPKnva57VAA_8KU2mPap";
 
 
-const supabase = createClient(
+const supabase =
+createClient(
 supabaseUrl,
 supabaseKey
 );
+
 
 
 
@@ -90,7 +93,7 @@ document.getElementById("navLogout");
 
 
 // ==========================
-// TROCA DE ABAS
+// ABAS LOGIN/CADASTRO
 // ==========================
 
 
@@ -137,6 +140,8 @@ cadastroTab.classList.add("active");
 
 
 
+
+
 // ==========================
 // CADASTRO
 // ==========================
@@ -167,9 +172,9 @@ const senha =
 document.getElementById("senha").value;
 
 
+
 const tipo =
 document.getElementById("tipoDocumento").value;
-
 
 
 
@@ -239,7 +244,6 @@ return;
 
 
 
-
 msg.innerText =
 "Conta criada com sucesso 🚍";
 
@@ -250,6 +254,7 @@ cadastroForm.reset();
 
 
 });
+
 
 
 
@@ -299,10 +304,10 @@ password:senha
 
 if(error){
 
-console.log(error);
 
 loginMsg.innerText =
 "Email ou senha incorretos ❌";
+
 
 return;
 
@@ -334,53 +339,12 @@ window.location.href="index.html";
 
 
 
-
-// ==========================
-// VERIFICAR USUÁRIO
-// ==========================
-
-
-async function checkUser(){
-
-
-const {
-
-data:{user}
-
-}=
-
-await supabase.auth.getUser();
-
-
-
-
-if(user){
-
-mostrarDashboard(user);
-
-}else{
-
-mostrarInicio();
-
-}
-
-
-}
-
-
-
-
-
-
-
-
-
 // ==========================
 // MOSTRAR DASHBOARD
 // ==========================
 
 
-function mostrarDashboard(user){
+async function mostrarDashboard(user){
 
 
 
@@ -392,9 +356,10 @@ paginaInicial.style.display="none";
 
 
 
+
 if(dashboardUsuario){
 
-dashboardUsuario.style.display="flex";
+dashboardUsuario.style.display="block";
 
 }
 
@@ -402,20 +367,39 @@ dashboardUsuario.style.display="flex";
 
 
 
+const {data}=
+
+await supabase
+
+.from("usuarios")
+
+.select("nome")
+
+.eq("id",user.id)
+
+.single();
+
+
+
+
+
+const nome =
+
+data?.nome || "Usuário";
+
+
+
+
+
+
+
 if(welcome){
 
+welcome.innerHTML =
 
-welcome.innerHTML = `
+`
 
-Bem-vindo ao Bus Flow 🚍
-
-<br>
-
-<span style="font-size:18px">
-
-${user.email}
-
-</span>
+Bem-vindo, ${nome} 🚍
 
 `;
 
@@ -427,8 +411,7 @@ ${user.email}
 
 if(navEmail){
 
-navEmail.innerText =
-user.email;
+navEmail.innerText = nome;
 
 }
 
@@ -458,7 +441,6 @@ navLogout.style.display="block";
 
 
 function mostrarInicio(){
-
 
 
 if(paginaInicial){
@@ -506,7 +488,6 @@ window.location.href="index.html";
 
 
 
-
 logoutBtn?.addEventListener(
 "click",
 logout
@@ -526,9 +507,48 @@ logout
 
 
 
+
 // ==========================
-// INICIAR
+// VERIFICAR LOGIN
 // ==========================
+
+
+async function checkUser(){
+
+
+const {
+
+data:{user}
+
+}=
+
+await supabase.auth.getUser();
+
+
+
+
+
+if(user){
+
+
+mostrarDashboard(user);
+
+
+}else{
+
+
+mostrarInicio();
+
+
+}
+
+
+
+}
+
+
+
+
 
 
 checkUser();
