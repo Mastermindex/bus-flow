@@ -1340,3 +1340,72 @@ gap:20px;
 
 
 }
+/* ==========================
+   ABAS LOGIN / CADASTRO
+========================== */
+
+
+.tabs{
+
+display:flex;
+
+gap:15px;
+
+margin-bottom:30px;
+
+background:#f1f5f9;
+
+padding:8px;
+
+border-radius:16px;
+
+}
+
+
+
+.tab{
+
+flex:1;
+
+padding:14px;
+
+border:none;
+
+border-radius:12px;
+
+background:transparent;
+
+font-size:1rem;
+
+font-weight:600;
+
+color:#64748b;
+
+cursor:pointer;
+
+transition:.3s;
+
+}
+
+
+
+.tab:hover{
+
+background:#e2e8f0;
+
+color:#0f62fe;
+
+}
+
+
+
+.tab.active{
+
+background:#0f62fe;
+
+color:white;
+
+box-shadow:
+0 8px 20px rgba(15,98,254,.25);
+
+}
