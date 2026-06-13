@@ -25,8 +25,39 @@ supabaseKey
 
 
 // ==========================
-// ELEMENTOS DASHBOARD
+// ELEMENTOS
 // ==========================
+
+
+// cadastro/login
+
+const cadastroForm =
+document.getElementById("cadastroForm");
+
+
+const loginForm =
+document.getElementById("loginForm");
+
+
+const cadastroTab =
+document.getElementById("cadastroTab");
+
+
+const loginTab =
+document.getElementById("loginTab");
+
+
+
+const msg =
+document.getElementById("msg");
+
+
+const loginMsg =
+document.getElementById("loginMsg");
+
+
+
+// dashboard
 
 const paginaInicial =
 document.getElementById("paginaInicial");
@@ -45,25 +76,196 @@ document.getElementById("logoutBtn");
 
 
 
+// navbar
+
+const navEmail =
+document.getElementById("navEmail");
+
+
+const navLogout =
+document.getElementById("navLogout");
+
+
+
+
+
+
 
 // ==========================
-// ELEMENTOS LOGIN
+// TROCAR ABAS
 // ==========================
 
-const loginForm =
-document.getElementById("loginForm");
+
+loginTab?.addEventListener(
+"click",
+()=>{
 
 
-const loginEmail =
-document.getElementById("loginEmail");
+cadastroForm.style.display="none";
+
+loginForm.style.display="block";
 
 
-const loginSenha =
-document.getElementById("loginSenha");
+cadastroTab.classList.remove("active");
+
+loginTab.classList.add("active");
 
 
-const loginMsg =
-document.getElementById("loginMsg");
+});
+
+
+
+
+cadastroTab?.addEventListener(
+"click",
+()=>{
+
+
+cadastroForm.style.display="block";
+
+loginForm.style.display="none";
+
+
+loginTab.classList.remove("active");
+
+cadastroTab.classList.add("active");
+
+
+});
+
+
+
+
+
+
+
+// ==========================
+// CADASTRO
+// ==========================
+
+
+cadastroForm?.addEventListener(
+"submit",
+async(e)=>{
+
+
+e.preventDefault();
+
+
+
+const nome =
+document.getElementById("nome").value;
+
+
+const documento =
+document.getElementById("documento").value;
+
+
+const email =
+document.getElementById("email").value;
+
+
+const senha =
+document.getElementById("senha").value;
+
+
+
+const tipo =
+document.getElementById("tipoDocumento").value;
+
+
+
+
+
+const {data,error} =
+await supabase.auth.signUp({
+
+email,
+
+password:senha
+
+});
+
+
+
+
+if(error){
+
+
+msg.innerText =
+error.message;
+
+
+return;
+
+
+}
+
+
+
+
+
+
+const {error:dbError}=
+
+await supabase
+
+.from("usuarios")
+
+.insert([
+
+{
+
+id:data.user.id,
+
+nome,
+
+documento,
+
+email,
+
+tipo
+
+}
+
+]);
+
+
+
+
+
+if(dbError){
+
+
+console.log(dbError);
+
+
+msg.innerText =
+"Erro ao salvar dados ❌";
+
+
+return;
+
+
+}
+
+
+
+msg.innerText =
+"Conta criada com sucesso 🚍";
+
+
+
+cadastroForm.reset();
+
+
+
+});
+
+
+
+
+
 
 
 
@@ -83,15 +285,18 @@ e.preventDefault();
 
 
 const email =
-loginEmail.value;
+document.getElementById("loginEmail").value;
+
 
 
 const senha =
-loginSenha.value;
+document.getElementById("loginSenha").value;
 
 
 
-const {data,error} =
+
+const {data,error}=
+
 await supabase.auth.signInWithPassword({
 
 email,
@@ -103,37 +308,36 @@ password:senha
 
 
 
+
 if(error){
 
 
 console.log(error);
 
 
-if(loginMsg){
-
 loginMsg.innerText =
-"Login inválido ❌";
-
-}
+"Email ou senha incorretos ❌";
 
 
 return;
 
+
 }
 
 
-
-
-if(loginMsg){
 
 loginMsg.innerText =
 "Login realizado 🚍";
 
-}
 
 
+setTimeout(()=>{
 
-mostrarDashboard(data.user);
+
+window.location.href="index.html";
+
+
+},700);
 
 
 
@@ -146,8 +350,10 @@ mostrarDashboard(data.user);
 
 
 
+
+
 // ==========================
-// VERIFICAR LOGIN EXISTENTE
+// VERIFICAR USUÁRIO
 // ==========================
 
 
@@ -158,7 +364,8 @@ const {
 
 data:{user}
 
-} =
+}=
+
 await supabase.auth.getUser();
 
 
@@ -174,7 +381,7 @@ mostrarDashboard(user);
 }else{
 
 
-mostrarInicio();
+mostrarLogin();
 
 
 }
@@ -182,6 +389,8 @@ mostrarInicio();
 
 
 }
+
+
 
 
 
@@ -190,7 +399,7 @@ mostrarInicio();
 
 
 // ==========================
-// MOSTRAR DASHBOARD
+// DASHBOARD
 // ==========================
 
 
@@ -200,8 +409,7 @@ function mostrarDashboard(user){
 
 if(paginaInicial){
 
-paginaInicial.style.display =
-"none";
+paginaInicial.style.display="none";
 
 }
 
@@ -209,25 +417,52 @@ paginaInicial.style.display =
 
 if(dashboardUsuario){
 
-dashboardUsuario.style.display =
-"block";
+dashboardUsuario.style.display="block";
 
 }
-
 
 
 
 if(welcome){
 
+welcome.innerHTML=
 
-welcome.innerText =
-`Bem-vindo ao Bus Flow, ${user.email} 🚍`;
+`
+
+Bem-vindo ao Bus Flow 🚍
+
+<br>
+
+<span style="font-size:18px">
+
+${user.email}
+
+</span>
+
+`;
 
 }
 
 
 
+if(navEmail){
+
+navEmail.innerText=user.email;
+
 }
+
+
+if(navLogout){
+
+navLogout.style.display="block";
+
+}
+
+
+}
+
+
+
 
 
 
@@ -236,33 +471,31 @@ welcome.innerText =
 
 
 // ==========================
-// MOSTRAR INÍCIO
+// SEM LOGIN
 // ==========================
 
 
-function mostrarInicio(){
-
+function mostrarLogin(){
 
 
 if(paginaInicial){
 
-paginaInicial.style.display =
-"block";
+paginaInicial.style.display="block";
 
 }
-
 
 
 
 if(dashboardUsuario){
 
-dashboardUsuario.style.display =
-"none";
+dashboardUsuario.style.display="none";
 
 }
 
 
 }
+
+
 
 
 
@@ -275,22 +508,31 @@ dashboardUsuario.style.display =
 // ==========================
 
 
-logoutBtn?.addEventListener(
-
-"click",
-
-async()=>{
+async function logout(){
 
 
 await supabase.auth.signOut();
 
 
-mostrarInicio();
+window.location.href="index.html";
 
 
 }
 
+
+
+logoutBtn?.addEventListener(
+"click",
+logout
 );
+
+
+
+navLogout?.addEventListener(
+"click",
+logout
+);
+
 
 
 
@@ -301,5 +543,6 @@ mostrarInicio();
 // ==========================
 // INICIAR
 // ==========================
+
 
 checkUser();
